@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base target="_top">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐟 FISH — MEDREV</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; }
+  body { background:#0b1220; color:#e2e8f0; min-height:100vh; padding:20px; }
+  .wrap { max-width:1000px; margin:0 auto; }
+  header { text-align:center; padding:24px 16px; background:linear-gradient(135deg,#0c4a6e,#0ea5e9); border-radius:16px; margin-bottom:20px; }
+  header h1 { font-size:28px; letter-spacing:3px; }
+  header p { color:#bae6fd; font-size:13px; margin-top:6px; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:22px; }
+  .stat { background:#111c33; border:1px solid #1e3a5f; border-radius:12px; padding:14px; text-align:center; }
+  .stat .n { font-size:28px; font-weight:700; }
+  .stat .l { font-size:11px; color:#7d8db1; text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+  .green{color:#22c55e;} .amber{color:#f59e0b;} .blue{color:#38bdf8;} .red{color:#ef4444;} .purple{color:#a78bfa;}
+  h2 { font-size:15px; text-transform:uppercase; letter-spacing:1.5px; color:#7dd3fc; margin:26px 0 12px; border-left:4px solid #0ea5e9; padding-left:10px; }
+  .meeting { background:#111c33; border:1px solid #1e3a5f; border-radius:12px; padding:14px 16px; margin-bottom:10px; display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+  .meeting .info { flex:1; min-width:200px; }
+  .meeting .t { font-weight:600; font-size:15px; }
+  .meeting .m { font-size:12px; color:#8fa3c8; margin-top:3px; }
+  .badge { padding:5px 12px; border-radius:20px; font-size:11px; font-weight:700; }
+  .b-done{background:#14532d;color:#4ade80;border:1px solid #22c55e;}
+  .b-up{background:#452a06;color:#fbbf24;border:1px solid #f59e0b;}
+  .taskbtn { background:#1e3a5f; color:#7dd3fc; border:1px solid #38bdf8; border-radius:8px; padding:6px 10px; font-size:11px; font-weight:600; cursor:pointer; }
+  .taskbtn:active { background:#38bdf8; color:#082f49; }
+  .cats { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+  .cat { background:#111c33; border:1px solid #1e3a5f; border-radius:12px; padding:16px; }
+  .cat h3 { font-size:14px; margin-bottom:8px; }
+  .cat .row { display:flex; justify-content:space-between; font-size:12.5px; padding:5px 0; border-bottom:1px dashed #1c2c49; }
+  .cat .row:last-child { border:none; }
+  table { width:100%; border-collapse:collapse; background:#111c33; border-radius:12px; overflow:hidden; font-size:12.5px; }
+  th { background:#16233f; color:#7dd3fc; text-align:left; padding:10px; font-size:11px; text-transform:uppercase; }
+  td { padding:9px 10px; border-top:1px solid #1a2a47; color:#c3d0e8; }
+  .st{font-weight:600;} .st-done{color:#4ade80;} .st-sub{color:#38bdf8;} .st-pend{color:#fbbf24;} .st-ban{color:#f87171;}
+  footer { text-align:center; color:#5c6b8a; font-size:11px; margin-top:28px; padding:16px; border-top:1px solid #1a2a47; }
+  .cbtn2 { background:#1e3a5f; color:#4ade80; border:1px solid #22c55e; border-radius:8px; padding:6px 10px; font-size:11px; font-weight:600; cursor:pointer; }
+  .cbtn2:active { background:#22c55e; color:#052e16; }
+  .cwrap { flex-basis:100%; }
+  .cinline { display:none; margin-top:8px; }
+  .cinline input { width:80%; background:#0b1220; color:#e2e8f0; border:1px solid #1e3a5f; border-radius:8px; padding:8px 10px; font-size:12px; }
+  .cinline button { background:#22c55e; color:#052e16; border:none; border-radius:8px; padding:8px 12px; font-size:12px; font-weight:700; cursor:pointer; margin-left:4px; }
+  .citem { background:#0e1a30; border-left:3px solid #22c55e; border-radius:6px; padding:7px 10px; margin-top:6px; font-size:12px; color:#c3d0e8; }
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#14532d; color:#4ade80; padding:10px 20px; border-radius:10px; font-size:13px; display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🐟 FISH</h1>
+    <p>MEDREV MSO LLC — Command Center</p>
+  </header>
+  <div class="stats" id="stats"></div>
+  <h2>📅 Meetings</h2>
+  <div id="meetings"></div>
+  <h2>🗂️ Categories</h2>
+  <div class="cats" id="cats"></div>
+  <h2>📋 Pipeline</h2>
+  <table><tr><th>Company</th><th>Category</th><th>Status</th></tr><tbody id="pipe"></tbody></table>
+  <footer>MEDREV MSO LLC · Umair Rasheed · Virtual AI Office — $0/month</footer>
+</div>
+<div class="toast" id="toast">✅ Copied! Google Tasks khul gaya — wahan paste karo (Ctrl+V)</div>
+
+<script>
+var STATIC = {
+  stats:[{n:'14',l:'Submitted',c:'blue'},{n:'1',l:'Done',c:'green'},{n:'3',l:'Upcoming',c:'amber'},{n:'12',l:'Pending',c:'amber'},{n:'5',l:'Verticals',c:'purple'}],
+  meetings:[
+    {id:'sunvena',t:'SunVena Solar — Exploratory',m:'Faustino Moronta · Google Meet · Mon 24 Aug, 1:00 AM PKT',s:'done'},
+    {id:'integratesun',t:'IntegrateSun — Onboarding Call',m:'Aahil Shakil · Google Meet · Wed 26 Aug, 7:00 PM PKT',s:'up'},
+    {id:'adp',t:'Alarm Guard (ADP) — Dealer Intro',m:'Dealer Manager · Thu 27 Aug, 3:00 PM EST = 1:00 AM PKT',s:'up'},
+    {id:'rsi',t:'RS&I — Master Agent',m:'Tom Henderson · Phone · Sat 29 Aug, 6:00 PM PKT',s:'up'}
+  ],
+  cats:[
+    {h:'☀️ Solar',rows:[['Submitted','6 + 1 signed'],['Done','SunVena ✅'],['Pending','ZEO reply']]},
+    {h:'📺 Telecom+Security',rows:[['Submitted','8'],['Next','ADT official'],['Ban','13 companies']]},
+    {h:'🔥 SMB CS',rows:[['Target',"Kenny's AC"],['Pitch','Ready']]},
+    {h:'🤖 AI Service',rows:[['Packages','$197-697'],['Kit','Complete']]},
+    {h:'⚙️ Systems',rows:[['Bot','LIVE'],['Agent','LIVE']]}
+  ],
+  pipeline:[
+    ['Universal Solar Direct','Solar','Submitted','sub'],['Solstice Solar','Solar','Submitted','sub'],
+    ['Sunsolar Solutions','Solar','Submitted','sub'],['SolarTech','Solar','Submitted','sub'],
+    ['IntegrateSun','Solar','Meeting Wed','sub'],['Simply Solar','Solar','SIGNED','done'],
+    ['ZEO Energy','Solar','Reply pending','pend'],['Vomtel','Telecom','Submitted','sub'],
+    ['DSI Systems','Telecom','Submitted','sub'],['RS&I','Telecom','Meeting Sat','sub'],
+    ['JNA','Telecom','Submitted','sub'],['HughesNet','Telecom','Submitted','sub'],
+    ['SafeStreets ADT','Telecom','Submitted','sub'],['Vector Security','Telecom','Reply came','sub'],
+    ['Alarm Guard ADP','Telecom','Meeting Thu','sub'],['ADT Official','Telecom','Next','pend'],
+    ["Kenny's AC",'SMB','Ready','pend'],['Ban list (13)','❌','Excluded','ban']
+  ]
+};
+var DATA = STATIC;
+fetch('fish-data.json').then(function(r){return r.json();}).then(function(j){
+  if (j && j.meetings && j.meetings.length) { DATA = j; render(); }
+}).catch(function(e){});
+function badge(s){return s==='done'?'<span class="badge b-done">✅ DONE</span>':s==='up'?'<span class="badge b-up">🔵 UPCOMING</span>':'<span class="badge b-up">ℹ️ '+s+'</span>';}
+function taskTxt(m){return m.t+' | '+m.m+' | (MEDREV - from FISH)';}
+function toTasks(m){
+  var txt=taskTxt(m);
+  try{ navigator.clipboard.writeText(txt); }catch(e){}
+  window.open('https://tasks.google.com/','_blank');
+  var t=document.getElementById('toast'); t.style.display='block'; setTimeout(function(){t.style.display='none';},3500);
+}
+var COMMENTS = [];
+function esc(s){return String(s).replace(/'/g,"\\'");}
+function toggleCmt(i){ var d=document.getElementById('ci-'+i); d.style.display = d.style.display==='none'?'block':'none'; }
+function saveCmt(i){
+  var inp=document.getElementById('cin-'+i);
+  var t=inp.value.trim(); if(!t)return;
+  var m=DATA.meetings[i];
+  COMMENTS.push({for:m.t,txt:t,at:new Date().toLocaleString()});
+  var sub = encodeURIComponent('FISH Comment - ' + m.t);
+  var body = encodeURIComponent(t + '\n\n--\nFrom FISH dashboard');
+  window.open('mailto:info.medrevfl@gmail.com?subject=' + sub + '&body=' + body);
+  var toast=document.getElementById('toast');
+  toast.textContent='Email window khul gaya - SEND dabao (comment assistant ko chala gaya)';
+  toast.style.display='block';
+  setTimeout(function(){toast.style.display='none';toast.textContent='Copied! Google Tasks khul gaya - wahan paste karo (Ctrl+V)';},4000);
+  inp.value=''; toggleCmt(i); render();
+}
+function cmtHtml(m){
+  var h='';
+  COMMENTS.forEach(function(c){ if(c.for===m.t) h+='<div class="citem">💬 '+c.txt+'<br><span style="color:#5c6b8a;font-size:10px">'+c.at+'</span></div>'; });
+  return h;
+}
+function render(){
+  var st='';DATA.stats.forEach(function(x){st+='<div class="stat"><div class="n '+x.c+'">'+x.n+'</div><div class="l">'+x.l+'</div></div>';});
+  document.getElementById('stats').innerHTML=st;
+  var m='';DATA.meetings.forEach(function(x,xi){m+='<div class="meeting"><div class="info"><div class="t">'+x.t+'</div><div class="m">'+x.m+'</div></div>'+badge(x.s)+'<button class="taskbtn" onclick="toTasks(DATA.meetings['+xi+'])">📋→Tasks</button><button class="cbtn2" onclick="toggleCmt('+xi+')">💬</button><div class="cwrap"><div class="cinline" id="ci-'+xi+'"><input id="cin-'+xi+'" placeholder="Comment likho (status/next step)..."><button onclick="saveCmt('+xi+')">✓</button></div>'+cmtHtml(x)+'</div></div>';});
+  document.getElementById('meetings').innerHTML=m;
+  var c='';DATA.cats.forEach(function(x){var r='';x.rows.forEach(function(y){r+='<div class="row"><span>'+y[0]+'</span><span style="color:#9fb2d6">'+y[1]+'</span></div>';});c+='<div class="cat"><h3>'+x.h+'</h3>'+r+'</div>';});
+  document.getElementById('cats').innerHTML=c;
+  var p='';DATA.pipeline.forEach(function(x){p+='<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td class="st st-'+x[3]+'">'+x[2]+'</td></tr>';});
+  document.getElementById('pipe').innerHTML=p;
+}
+render();
+</script>
+</body>
+</html>

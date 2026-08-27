@@ -1,0 +1,264 @@
+{
+ "stats": [
+  {
+   "n": "14",
+   "l": "Submitted",
+   "c": "blue"
+  },
+  {
+   "n": "1",
+   "l": "Done",
+   "c": "green"
+  },
+  {
+   "n": "4",
+   "l": "Upcoming",
+   "c": "amber"
+  },
+  {
+   "n": "12",
+   "l": "Pending",
+   "c": "amber"
+  },
+  {
+   "n": "5",
+   "l": "Verticals",
+   "c": "purple"
+  }
+ ],
+ "meetings": [
+  {
+   "id": "sunvena",
+   "t": "SunVena Solar \u2014 Exploratory",
+   "m": "Faustino Moronta \u00b7 Google Meet \u00b7 Mon 24 Aug, 1:00 AM PKT",
+   "s": "done"
+  },
+  {
+   "id": "integratesun",
+   "t": "IntegrateSun \u2014 Onboarding Call",
+   "m": "Aahil Shakil \u00b7 Google Meet \u00b7 TODAY Wed 26 Aug, 7:00 PM PKT / 9AM EST",
+   "s": "up"
+  },
+  {
+   "id": "adp",
+   "t": "Alarm Guard (ADP) \u2014 Dealer Intro",
+   "m": "Dealer Manager \u00b7 Thu 27 Aug, 3:00 PM EST = 1:00 AM PKT",
+   "s": "up"
+  },
+  {
+   "id": "rsi",
+   "t": "RS&I \u2014 Master Agent",
+   "m": "Tom Henderson \u00b7 Phone \u00b7 Sat 29 Aug, 6:00 PM PKT",
+   "s": "up"
+  }
+ ],
+ "cats": [
+  {
+   "h": "\u2600\ufe0f Solar",
+   "rows": [
+    [
+     "Submitted",
+     "6 + 1 signed"
+    ],
+    [
+     "Done",
+     "SunVena \u2705"
+    ],
+    [
+     "Pending",
+     "ZEO reply"
+    ],
+    [
+     "Today",
+     "IntegrateSun 7PM!"
+    ]
+   ]
+  },
+  {
+   "h": "\ud83d\udcfa Telecom+Security",
+   "rows": [
+    [
+     "Submitted",
+     "8"
+    ],
+    [
+     "Next",
+     "ADT official"
+    ],
+    [
+     "Ban",
+     "13 companies"
+    ]
+   ]
+  },
+  {
+   "h": "\ud83d\udd25 SMB CS",
+   "rows": [
+    [
+     "Targets",
+     "Kenny's AC + Tampa Bay AC"
+    ],
+    [
+     "Tampa Bay",
+     "FORM SENT \u2713 (email bounce - call 813-797-5364)"
+    ],
+    [
+     "Air Rescue",
+     "Emails bounced - use form/call"
+    ]
+   ]
+  },
+  {
+   "h": "\ud83e\udd16 AI Service",
+   "rows": [
+    [
+     "Packages",
+     "$197-697"
+    ],
+    [
+     "Kit",
+     "Complete"
+    ]
+   ]
+  },
+  {
+   "h": "\u2699\ufe0f Systems",
+   "rows": [
+    [
+     "Bot",
+     "LIVE"
+    ],
+    [
+     "Agent",
+     "LIVE"
+    ],
+    [
+     "FISH",
+     "GitHub Pages - LIVE"
+    ]
+   ]
+  }
+ ],
+ "pipeline": [
+  [
+   "Universal Solar Direct",
+   "Solar",
+   "Submitted",
+   "sub"
+  ],
+  [
+   "Solstice Solar",
+   "Solar",
+   "Submitted",
+   "sub"
+  ],
+  [
+   "Sunsolar Solutions",
+   "Solar",
+   "Submitted",
+   "sub"
+  ],
+  [
+   "SolarTech",
+   "Solar",
+   "Submitted",
+   "sub"
+  ],
+  [
+   "IntegrateSun",
+   "Solar",
+   "TODAY meeting",
+   "sub"
+  ],
+  [
+   "Simply Solar",
+   "Solar",
+   "SIGNED",
+   "done"
+  ],
+  [
+   "ZEO Energy",
+   "Solar",
+   "Reply pending",
+   "pend"
+  ],
+  [
+   "Vomtel",
+   "Telecom",
+   "Submitted",
+   "sub"
+  ],
+  [
+   "DSI Systems",
+   "Telecom",
+   "Submitted",
+   "sub"
+  ],
+  [
+   "RS&I",
+   "Telecom",
+   "Meeting Sat",
+   "sub"
+  ],
+  [
+   "JNA",
+   "Telecom",
+   "Submitted",
+   "sub"
+  ],
+  [
+   "HughesNet",
+   "Telecom",
+   "Submitted",
+   "sub"
+  ],
+  [
+   "SafeStreets ADT",
+   "Telecom",
+   "Submitted",
+   "sub"
+  ],
+  [
+   "Vector Security",
+   "Telecom",
+   "Reply came",
+   "sub"
+  ],
+  [
+   "Alarm Guard ADP",
+   "Telecom",
+   "Meeting Thu",
+   "sub"
+  ],
+  [
+   "ADT Official",
+   "Telecom",
+   "Next",
+   "pend"
+  ],
+  [
+   "Tampa Bay AC",
+   "SMB",
+   "Form SENT \u2713",
+   "sub"
+  ],
+  [
+   "Kenny's AC",
+   "SMB",
+   "Ready",
+   "pend"
+  ],
+  [
+   "Air Rescue",
+   "SMB",
+   "Emails bounced",
+   "pend"
+  ],
+  [
+   "Ban list (13)",
+   "\u274c",
+   "Excluded",
+   "ban"
+  ]
+ ]
+}
