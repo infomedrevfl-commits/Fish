@@ -1,17 +1,17 @@
 {
  "stats": [
   {
-   "n": "14",
+   "n": "15",
    "l": "Submitted",
    "c": "blue"
   },
   {
-   "n": "1",
+   "n": "2",
    "l": "Done",
    "c": "green"
   },
   {
-   "n": "4",
+   "n": "2",
    "l": "Upcoming",
    "c": "amber"
   },
@@ -30,26 +30,32 @@
   {
    "id": "sunvena",
    "t": "SunVena Solar \u2014 Exploratory",
-   "m": "Faustino Moronta \u00b7 Google Meet \u00b7 Mon 24 Aug, 1:00 AM PKT",
-   "s": "done"
+   "m": "Faustino Moronta \u00b7 DONE \u2014 unke partner ko refer karenge \u00b7 Proposal bhejna hai",
+   "s": "done",
+   "dt": "2026-08-25T01:00:00+05:00",
+   "link": "https://meet.google.com/dkd-tnoi-wxk"
   },
   {
    "id": "integratesun",
    "t": "IntegrateSun \u2014 Onboarding Call",
-   "m": "Aahil Shakil \u00b7 Google Meet \u00b7 TODAY Wed 26 Aug, 7:00 PM PKT / 9AM EST",
-   "s": "up"
+   "m": "Aahil Shakil \u00b7 Google Meet",
+   "s": "up",
+   "dt": "2026-08-26T19:00:00+05:00",
+   "link": "https://meet.google.com/urn-xedb-gfy"
   },
   {
    "id": "adp",
    "t": "Alarm Guard (ADP) \u2014 Dealer Intro",
    "m": "Dealer Manager \u00b7 Thu 27 Aug, 3:00 PM EST = 1:00 AM PKT",
-   "s": "up"
+   "s": "up",
+   "dt": "2026-08-28T01:00:00+05:00"
   },
   {
    "id": "rsi",
    "t": "RS&I \u2014 Master Agent",
-   "m": "Tom Henderson \u00b7 Phone \u00b7 Sat 29 Aug, 6:00 PM PKT",
-   "s": "up"
+   "m": "Tom Henderson \u00b7 Phone",
+   "s": "up",
+   "dt": "2026-08-29T18:00:00+05:00"
   }
  ],
  "cats": [

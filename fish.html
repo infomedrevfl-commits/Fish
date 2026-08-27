@@ -22,7 +22,8 @@
   .mrow { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
   .meeting .info { flex:1; min-width:200px; }
   .meeting .t { font-weight:700; font-size:16px; }
-  .mtime { font-size:19px; font-weight:900; margin-top:6px; color:#fff; letter-spacing:.5px; }
+  .mlabel { display:inline-block; background:#7c2d12; color:#fdba74; border:1px solid #ea580c; border-radius:6px; padding:2px 8px; font-size:10.5px; font-weight:800; letter-spacing:1px; margin-top:7px; text-transform:uppercase; }
+  .mtime { font-size:19px; font-weight:900; margin-top:4px; color:#fbbf24; letter-spacing:.5px; }
   .mcd { font-size:16px; font-weight:900; background:#0b1830; border:1px solid #1e3a5f; border-radius:8px; padding:4px 10px; display:inline-block; margin-top:6px; }
   .mcd { font-size:13px; font-weight:700; margin-top:3px; }
   .badge { padding:5px 12px; border-radius:20px; font-size:11px; font-weight:700; white-space:nowrap; }
@@ -240,7 +241,8 @@ function renderMeetings() {
   DATA.meetings.forEach(function (x, i) {
     var st = mstat(x.dt);
     h += '<div class="meeting"><div class="mrow"><div class="info"><div class="t">' + x.t + '</div>'
-      + '<div class="mtime">🕒 ' + (x.dt ? fmtDT(x.dt) : 'Time TBA') + '</div>'
+      + '<div><span class="mlabel">🇵🇰 Meeting Time — Pakistan</span></div>'
+      + '<div class="mtime">' + (x.dt ? '🕒 ' + fmtDT(x.dt) : '⏰ Time set hoga — jald update') + '</div>'
       + '<div class="mcd cd-' + st.k + '">' + (x.dt ? countdown(x.dt) : '') + '</div>'
       + '<div style="font-size:12px;color:#8fa3c8;margin-top:6px">' + x.m + '</div></div>'
       + '<span class="badge b-' + st.k + '">' + st.label + '</span>'
@@ -262,5 +264,5 @@ function render() {
 }
 boot();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a31e43ff8a191e3f',t:'MTc4Nzg2NzE1MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
