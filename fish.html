@@ -4,30 +4,44 @@
 <base target="_top">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🐟 FISH — MEDREV</title>
+<title>🐟 FISH</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; }
   body { background:#0b1220; color:#e2e8f0; min-height:100vh; padding:20px; }
   .wrap { max-width:1000px; margin:0 auto; }
-  header { text-align:center; padding:24px 16px; background:linear-gradient(135deg,#0c4a6e,#0ea5e9); border-radius:16px; margin-bottom:20px; }
+  header { text-align:center; padding:22px 16px; background:linear-gradient(135deg,#0c4a6e,#0ea5e9); border-radius:16px; margin-bottom:20px; }
   header h1 { font-size:28px; letter-spacing:3px; }
-  header p { color:#bae6fd; font-size:13px; margin-top:6px; }
-  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:22px; }
-  .stat { background:#111c33; border:1px solid #1e3a5f; border-radius:12px; padding:14px; text-align:center; }
-  .stat .n { font-size:28px; font-weight:700; }
-  .stat .l { font-size:11px; color:#7d8db1; text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+  header p { color:#bae6fd; font-size:13px; margin-top:4px; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin-bottom:22px; }
+  .stat { background:#111c33; border:1px solid #1e3a5f; border-radius:12px; padding:12px; text-align:center; }
+  .stat .n { font-size:26px; font-weight:700; }
+  .stat .l { font-size:10px; color:#7d8db1; text-transform:uppercase; letter-spacing:1px; margin-top:3px; }
   .green{color:#22c55e;} .amber{color:#f59e0b;} .blue{color:#38bdf8;} .red{color:#ef4444;} .purple{color:#a78bfa;}
   h2 { font-size:15px; text-transform:uppercase; letter-spacing:1.5px; color:#7dd3fc; margin:26px 0 12px; border-left:4px solid #0ea5e9; padding-left:10px; }
-  .meeting { background:#111c33; border:1px solid #1e3a5f; border-radius:12px; padding:14px 16px; margin-bottom:10px; display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+  .meeting { background:#111c33; border:1px solid #1e3a5f; border-radius:12px; padding:14px 16px; margin-bottom:10px; }
+  .mrow { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
   .meeting .info { flex:1; min-width:200px; }
-  .meeting .t { font-weight:600; font-size:15px; }
-  .meeting .m { font-size:12px; color:#8fa3c8; margin-top:3px; }
-  .badge { padding:5px 12px; border-radius:20px; font-size:11px; font-weight:700; }
-  .b-done{background:#14532d;color:#4ade80;border:1px solid #22c55e;}
-  .b-up{background:#452a06;color:#fbbf24;border:1px solid #f59e0b;}
-  .taskbtn { background:#1e3a5f; color:#7dd3fc; border:1px solid #38bdf8; border-radius:8px; padding:6px 10px; font-size:11px; font-weight:600; cursor:pointer; }
-  .taskbtn:active { background:#38bdf8; color:#082f49; }
-  .cats { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+  .meeting .t { font-weight:700; font-size:16px; }
+  .mtime { font-size:15px; font-weight:700; margin-top:5px; }
+  .mcd { font-size:13px; font-weight:700; margin-top:3px; }
+  .badge { padding:5px 12px; border-radius:20px; font-size:11px; font-weight:700; white-space:nowrap; }
+  .b-far{background:#0c2a4d;color:#38bdf8;border:1px solid #0284c7;}
+  .b-soon{background:#452a06;color:#fbbf24;border:1px solid #f59e0b;}
+  .b-live{background:#14532d;color:#4ade80;border:1px solid #22c55e;animation:pulse 1.2s infinite;}
+  .b-end{background:#450a0a;color:#f87171;border:1px solid #ef4444;}
+  @keyframes pulse { 50% { opacity:.55; } }
+  .cd-far{color:#38bdf8;} .cd-soon{color:#fbbf24;} .cd-live{color:#4ade80;} .cd-end{color:#f87171;}
+  .taskbtn,.joinbtn,.cbtn2 { border-radius:8px; padding:7px 10px; font-size:11px; font-weight:700; cursor:pointer; }
+  .taskbtn { background:#1e3a5f; color:#7dd3fc; border:1px solid #38bdf8; }
+  .joinbtn { background:#14532d; color:#4ade80; border:1px solid #22c55e; text-decoration:none; display:inline-block; }
+  .cbtn2 { background:#1e3a5f; color:#4ade80; border:1px solid #22c55e; }
+  .cwrap { flex-basis:100%; }
+  .cinline { display:none; margin-top:8px; }
+  .cinline input { width:78%; background:#0b1220; color:#e2e8f0; border:1px solid #1e3a5f; border-radius:8px; padding:8px 10px; font-size:12px; }
+  .cinline button { background:#22c55e; color:#052e16; border:none; border-radius:8px; padding:8px 12px; font-size:12px; font-weight:700; cursor:pointer; margin-left:4px; }
+  .citem { background:#0e1a30; border-left:3px solid #22c55e; border-radius:6px; padding:7px 10px; margin-top:6px; font-size:12.5px; color:#c3d0e8; display:flex; justify-content:space-between; gap:8px; }
+  .cdel { background:none; border:none; color:#f87171; font-size:14px; cursor:pointer; }
+  .cats { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:12px; }
   .cat { background:#111c33; border:1px solid #1e3a5f; border-radius:12px; padding:16px; }
   .cat h3 { font-size:14px; margin-bottom:8px; }
   .cat .row { display:flex; justify-content:space-between; font-size:12.5px; padding:5px 0; border-bottom:1px dashed #1c2c49; }
@@ -37,21 +51,31 @@
   td { padding:9px 10px; border-top:1px solid #1a2a47; color:#c3d0e8; }
   .st{font-weight:600;} .st-done{color:#4ade80;} .st-sub{color:#38bdf8;} .st-pend{color:#fbbf24;} .st-ban{color:#f87171;}
   footer { text-align:center; color:#5c6b8a; font-size:11px; margin-top:28px; padding:16px; border-top:1px solid #1a2a47; }
-  .cbtn2 { background:#1e3a5f; color:#4ade80; border:1px solid #22c55e; border-radius:8px; padding:6px 10px; font-size:11px; font-weight:600; cursor:pointer; }
-  .cbtn2:active { background:#22c55e; color:#052e16; }
-  .cwrap { flex-basis:100%; }
-  .cinline { display:none; margin-top:8px; }
-  .cinline input { width:80%; background:#0b1220; color:#e2e8f0; border:1px solid #1e3a5f; border-radius:8px; padding:8px 10px; font-size:12px; }
-  .cinline button { background:#22c55e; color:#052e16; border:none; border-radius:8px; padding:8px 12px; font-size:12px; font-weight:700; cursor:pointer; margin-left:4px; }
-  .citem { background:#0e1a30; border-left:3px solid #22c55e; border-radius:6px; padding:7px 10px; margin-top:6px; font-size:12px; color:#c3d0e8; }
-  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#14532d; color:#4ade80; padding:10px 20px; border-radius:10px; font-size:13px; display:none; }
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#14532d; color:#4ade80; padding:10px 20px; border-radius:10px; font-size:13px; display:none; z-index:100; }
+  .lockbtn { background:none; border:1px solid #bae6fd; color:#bae6fd; border-radius:8px; padding:4px 10px; font-size:11px; cursor:pointer; margin-top:8px; }
+  #gate { position:fixed; inset:0; background:#060b16; z-index:99; display:flex; align-items:center; justify-content:center; }
+  .gcard { background:#111c33; border:1px solid #1e3a5f; border-radius:16px; padding:30px; text-align:center; width:280px; }
+  .gcard h2 { border:none; color:#7dd3fc; margin:0 0 6px; }
+  .gcard input { width:100%; background:#0b1220; color:#e2e8f0; border:1px solid #1e3a5f; border-radius:10px; padding:12px; font-size:20px; text-align:center; letter-spacing:6px; margin:14px 0; }
+  .gcard button { width:100%; background:#0ea5e9; color:#fff; border:none; border-radius:10px; padding:12px; font-size:15px; font-weight:700; cursor:pointer; }
+  .gerr { color:#f87171; font-size:12px; height:16px; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div id="gate">
+  <div class="gcard">
+    <h2>🐟 FISH</h2>
+    <p style="color:#7d8db1;font-size:12px">PIN enter karo</p>
+    <input id="pinin" type="password" inputmode="numeric" maxlength="8" placeholder="••••••">
+    <div class="gerr" id="gerr"></div>
+    <button onclick="checkPin()">UNLOCK 🔓</button>
+  </div>
+</div>
+<div class="wrap" id="app" style="display:none">
   <header>
     <h1>🐟 FISH</h1>
     <p>MEDREV MSO LLC — Command Center</p>
+    <button class="lockbtn" onclick="sessionStorage.removeItem('fish_ok');location.reload();">🔒 Lock</button>
   </header>
   <div class="stats" id="stats"></div>
   <h2>📅 Meetings</h2>
@@ -62,81 +86,180 @@
   <table><tr><th>Company</th><th>Category</th><th>Status</th></tr><tbody id="pipe"></tbody></table>
   <footer>MEDREV MSO LLC · Umair Rasheed · Virtual AI Office — $0/month</footer>
 </div>
-<div class="toast" id="toast">✅ Copied! Google Tasks khul gaya — wahan paste karo (Ctrl+V)</div>
+<div class="toast" id="toast"></div>
 
 <script>
+var REPO = 'infomedrevfl-commits/Fish';
+var CFG = { token: '', pin: '819044' };
+var DATA = null, COMMENTS = [], TIMER = null;
+
 var STATIC = {
-  stats:[{n:'14',l:'Submitted',c:'blue'},{n:'1',l:'Done',c:'green'},{n:'3',l:'Upcoming',c:'amber'},{n:'12',l:'Pending',c:'amber'},{n:'5',l:'Verticals',c:'purple'}],
+  stats:[{n:'15',l:'Submitted',c:'blue'},{n:'2',l:'Done',c:'green'},{n:'2',l:'Upcoming',c:'amber'},{n:'12',l:'Pending',c:'amber'},{n:'5',l:'Verticals',c:'purple'}],
   meetings:[
-    {id:'sunvena',t:'SunVena Solar — Exploratory',m:'Faustino Moronta · Google Meet · Mon 24 Aug, 1:00 AM PKT',s:'done'},
-    {id:'integratesun',t:'IntegrateSun — Onboarding Call',m:'Aahil Shakil · Google Meet · Wed 26 Aug, 7:00 PM PKT',s:'up'},
-    {id:'adp',t:'Alarm Guard (ADP) — Dealer Intro',m:'Dealer Manager · Thu 27 Aug, 3:00 PM EST = 1:00 AM PKT',s:'up'},
-    {id:'rsi',t:'RS&I — Master Agent',m:'Tom Henderson · Phone · Sat 29 Aug, 6:00 PM PKT',s:'up'}
+    {id:'sunvena',t:'SunVena Solar — Exploratory',m:'Faustino Moronta · Google Meet',dt:'2026-08-25T01:00:00+05:00',link:'https://meet.google.com/dkd-tnoi-wxk'},
+    {id:'integratesun',t:'IntegrateSun — Onboarding Call',m:'Aahil Shakil · Google Meet',dt:'2026-08-26T19:00:00+05:00',link:'https://meet.google.com/urn-xedb-gfy'},
+    {id:'adp',t:'Alarm Guard (ADP) — Dealer Intro',m:'Dealer Manager',dt:'2026-08-28T01:00:00+05:00'},
+    {id:'rsi',t:'RS&I — Master Agent',m:'Tom Henderson · 689-338-6688',dt:'2026-08-29T18:00:00+05:00'}
   ],
   cats:[
     {h:'☀️ Solar',rows:[['Submitted','6 + 1 signed'],['Done','SunVena ✅'],['Pending','ZEO reply']]},
     {h:'📺 Telecom+Security',rows:[['Submitted','8'],['Next','ADT official'],['Ban','13 companies']]},
-    {h:'🔥 SMB CS',rows:[['Target',"Kenny's AC"],['Pitch','Ready']]},
+    {h:'🔥 SMB CS',rows:[['Targets',"Kenny's + Tampa Bay AC"],['Forms sent','2']]},
     {h:'🤖 AI Service',rows:[['Packages','$197-697'],['Kit','Complete']]},
-    {h:'⚙️ Systems',rows:[['Bot','LIVE'],['Agent','LIVE']]}
+    {h:'⚙️ Systems',rows:[['Bot','LIVE'],['Agent','LIVE'],['FISH','LIVE']]}
   ],
   pipeline:[
     ['Universal Solar Direct','Solar','Submitted','sub'],['Solstice Solar','Solar','Submitted','sub'],
     ['Sunsolar Solutions','Solar','Submitted','sub'],['SolarTech','Solar','Submitted','sub'],
-    ['IntegrateSun','Solar','Meeting Wed','sub'],['Simply Solar','Solar','SIGNED','done'],
+    ['IntegrateSun','Solar','Meeting held','sub'],['Simply Solar','Solar','SIGNED','done'],
     ['ZEO Energy','Solar','Reply pending','pend'],['Vomtel','Telecom','Submitted','sub'],
     ['DSI Systems','Telecom','Submitted','sub'],['RS&I','Telecom','Meeting Sat','sub'],
     ['JNA','Telecom','Submitted','sub'],['HughesNet','Telecom','Submitted','sub'],
     ['SafeStreets ADT','Telecom','Submitted','sub'],['Vector Security','Telecom','Reply came','sub'],
     ['Alarm Guard ADP','Telecom','Meeting Thu','sub'],['ADT Official','Telecom','Next','pend'],
-    ["Kenny's AC",'SMB','Ready','pend'],['Ban list (13)','❌','Excluded','ban']
+    ['Tampa Bay AC','SMB','Form sent','sub'],["Kenny's AC",'SMB','Ready','pend'],
+    ['Ban list (13)','❌','Excluded','ban']
   ]
 };
-var DATA = STATIC;
-fetch('fish-data.json').then(function(r){return r.json();}).then(function(j){
-  if (j && j.meetings && j.meetings.length) { DATA = j; render(); }
-}).catch(function(e){});
-function badge(s){return s==='done'?'<span class="badge b-done">✅ DONE</span>':s==='up'?'<span class="badge b-up">🔵 UPCOMING</span>':'<span class="badge b-up">ℹ️ '+s+'</span>';}
-function taskTxt(m){return m.t+' | '+m.m+' | (MEDREV - from FISH)';}
-function toTasks(m){
-  var txt=taskTxt(m);
-  try{ navigator.clipboard.writeText(txt); }catch(e){}
-  window.open('https://tasks.google.com/','_blank');
-  var t=document.getElementById('toast'); t.style.display='block'; setTimeout(function(){t.style.display='none';},3500);
+
+function boot() {
+  fetch('fish-config.json?t=' + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (c) {
+    if (c && c.token) CFG.token = c.token;
+    if (c && c.pin) CFG.pin = String(c.pin);
+    init();
+  }).catch(function () { init(); });
 }
-var COMMENTS = [];
-function esc(s){return String(s).replace(/'/g,"\\'");}
-function toggleCmt(i){ var d=document.getElementById('ci-'+i); d.style.display = d.style.display==='none'?'block':'none'; }
-function saveCmt(i){
-  var inp=document.getElementById('cin-'+i);
-  var t=inp.value.trim(); if(!t)return;
-  var m=DATA.meetings[i];
-  COMMENTS.push({for:m.t,txt:t,at:new Date().toLocaleString()});
-  var sub = encodeURIComponent('FISH Comment - ' + m.t);
-  var body = encodeURIComponent(t + '\n\n--\nFrom FISH dashboard');
-  window.open('mailto:info.medrevfl@gmail.com?subject=' + sub + '&body=' + body);
-  var toast=document.getElementById('toast');
-  toast.textContent='Email window khul gaya - SEND dabao (comment assistant ko chala gaya)';
-  toast.style.display='block';
-  setTimeout(function(){toast.style.display='none';toast.textContent='Copied! Google Tasks khul gaya - wahan paste karo (Ctrl+V)';},4000);
-  inp.value=''; toggleCmt(i); render();
+function init() {
+  if (sessionStorage.getItem('fish_ok') === '1') { openApp(); } else {
+    document.getElementById('gate').style.display = 'flex';
+    document.getElementById('pinin').focus();
+    document.getElementById('pinin').addEventListener('keyup', function (e) { if (e.key === 'Enter') checkPin(); });
+  }
 }
-function cmtHtml(m){
-  var h='';
-  COMMENTS.forEach(function(c){ if(c.for===m.t) h+='<div class="citem">💬 '+c.txt+'<br><span style="color:#5c6b8a;font-size:10px">'+c.at+'</span></div>'; });
+function checkPin() {
+  var v = document.getElementById('pinin').value.trim();
+  if (v === CFG.pin) { sessionStorage.setItem('fish_ok', '1'); openApp(); }
+  else { document.getElementById('gerr').textContent = 'Ghalat PIN — dobara try karo'; document.getElementById('pinin').value = ''; }
+}
+function openApp() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  fetch('fish-data.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (j) {
+    DATA = (j && j.meetings && j.meetings.length) ? j : STATIC;
+    afterData();
+  }).catch(function () { DATA = STATIC; afterData(); });
+}
+function afterData() {
+  loadComments(function () {
+    render();
+    if (TIMER) clearInterval(TIMER);
+    TIMER = setInterval(tick, 30000);
+  });
+}
+function tick() {
+  var a = document.activeElement;
+  if (a && a.id && a.id.indexOf('cin-') === 0) return;
+  renderMeetings();
+}
+function fmtDT(iso) {
+  var d = new Date(iso);
+  return d.toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Asia/Karachi' }) + ' PKT';
+}
+function mstat(iso) {
+  var s = new Date(iso).getTime(), n = Date.now();
+  if (isNaN(s)) return { k: 'far', label: 'UPCOMING' };
+  var d = s - n;
+  if (d > 24 * 3600000) return { k: 'far', label: 'UPCOMING' };
+  if (d > 3600000) return { k: 'soon', label: 'SOON' };
+  if (d > 0) return { k: 'live', label: 'STARTING' };
+  if (d > -45 * 60000) return { k: 'live', label: 'LIVE NOW' };
+  return { k: 'end', label: 'ENDED' };
+}
+function countdown(iso) {
+  var s = new Date(iso).getTime(), n = Date.now(), d = s - n;
+  function p(ms) { var h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000); return (h > 24 ? Math.floor(h / 24) + 'd ' + (h % 24) + 'h ' : h > 0 ? h + 'h ' + m + 'm ' : m + 'm '); }
+  if (isNaN(d)) return '';
+  if (d > 0) return '⏳ in ' + p(d);
+  if (d > -45 * 60000) return '🔴 LIVE';
+  return '⏹ ' + p(-d) + 'ago';
+}
+function loadComments(cb) {
+  fetch('comments.json?t=' + Date.now()).then(function (r) { return r.ok ? r.json() : []; }).then(function (j) {
+    COMMENTS = (j && j.length) ? j : [];
+    try { var l = JSON.parse(localStorage.getItem('fish_comments') || '[]'); l.forEach(function (c) { if (!COMMENTS.filter(function (x) { return x.id === c.id; }).length) COMMENTS.push(c); }); } catch (e) {}
+    cb();
+  }).catch(function () { cb(); });
+}
+function apiSave() {
+  if (!CFG.token) { localStorage.setItem('fish_comments', JSON.stringify(COMMENTS)); return; }
+  var b64 = btoa(unescape(encodeURIComponent(JSON.stringify(COMMENTS, null, 1))));
+  fetch('https://api.github.com/repos/' + REPO + '/contents/comments.json', { headers: { Authorization: 'Bearer ' + CFG.token, Accept: 'application/vnd.github+json' } })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      var payload = { message: 'fish: comments update', content: b64, branch: 'main' };
+      if (j && j.sha) payload.sha = j.sha;
+      return fetch('https://api.github.com/repos/' + REPO + '/contents/comments.json', { method: 'PUT', headers: { Authorization: 'Bearer ' + CFG.token, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    })
+    .then(function (r) { toast(r && r.ok ? '✅ Repo mein save — sab dekh sakte hain' : '⚠️ Save fail — dobara try'); })
+    .catch(function () { toast('⚠️ Network error'); });
+}
+function toast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; setTimeout(function () { t.style.display = 'none'; }, 3500); }
+function toggleCmt(i) { var d = document.getElementById('ci-' + i); d.style.display = d.style.display === 'none' ? 'block' : 'none'; }
+function saveCmt(i) {
+  var inp = document.getElementById('cin-' + i), t = inp.value.trim();
+  if (!t) return;
+  var m = DATA.meetings[i];
+  COMMENTS.push({ id: 'c' + Date.now(), for: m.t, txt: t, at: new Date().toLocaleString('en-GB', { timeZone: 'Asia/Karachi' }) });
+  if (!CFG.token) {
+    var sub = encodeURIComponent('FISH Comment - ' + m.t), body = encodeURIComponent(t + '\n\n--\nFrom FISH');
+    window.open('mailto:info.medrevfl@gmail.com?subject=' + sub + '&body=' + body);
+    toast('Token nahi hai — email draft khula (SEND dabao)');
+  } else { toast('Saving...'); }
+  localStorage.setItem('fish_comments', JSON.stringify(COMMENTS));
+  apiSave(); inp.value = ''; toggleCmt(i); renderMeetings();
+}
+function delCmt(id) {
+  if (!confirm('Comment delete karna hai?')) return;
+  COMMENTS = COMMENTS.filter(function (c) { return c.id !== id; });
+  localStorage.setItem('fish_comments', JSON.stringify(COMMENTS));
+  apiSave(); renderMeetings();
+}
+function cmtHtml(m) {
+  var h = '';
+  COMMENTS.forEach(function (c) { if (c.for === m.t) h += '<div class="citem"><span>💬 ' + c.txt + '<br><span style="color:#5c6b8a;font-size:10px">' + c.at + '</span></span><button class="cdel" onclick="delCmt(\'' + c.id + '\')">🗑</button></div>'; });
   return h;
 }
-function render(){
-  var st='';DATA.stats.forEach(function(x){st+='<div class="stat"><div class="n '+x.c+'">'+x.n+'</div><div class="l">'+x.l+'</div></div>';});
-  document.getElementById('stats').innerHTML=st;
-  var m='';DATA.meetings.forEach(function(x,xi){m+='<div class="meeting"><div class="info"><div class="t">'+x.t+'</div><div class="m">'+x.m+'</div></div>'+badge(x.s)+'<button class="taskbtn" onclick="toTasks(DATA.meetings['+xi+'])">📋→Tasks</button><button class="cbtn2" onclick="toggleCmt('+xi+')">💬</button><div class="cwrap"><div class="cinline" id="ci-'+xi+'"><input id="cin-'+xi+'" placeholder="Comment likho (status/next step)..."><button onclick="saveCmt('+xi+')">✓</button></div>'+cmtHtml(x)+'</div></div>';});
-  document.getElementById('meetings').innerHTML=m;
-  var c='';DATA.cats.forEach(function(x){var r='';x.rows.forEach(function(y){r+='<div class="row"><span>'+y[0]+'</span><span style="color:#9fb2d6">'+y[1]+'</span></div>';});c+='<div class="cat"><h3>'+x.h+'</h3>'+r+'</div>';});
-  document.getElementById('cats').innerHTML=c;
-  var p='';DATA.pipeline.forEach(function(x){p+='<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td class="st st-'+x[3]+'">'+x[2]+'</td></tr>';});
-  document.getElementById('pipe').innerHTML=p;
+function toTasks(m) {
+  try { navigator.clipboard.writeText(m.t + ' | ' + fmtDT(m.dt) + ' | ' + m.m + ' | (MEDREV - FISH)'); } catch (e) {}
+  window.open('https://tasks.google.com/', '_blank');
+  toast('✅ Copy ho gaya — Tasks mein paste karo (Ctrl+V)');
 }
-render();
+function renderMeetings() {
+  var h = '';
+  DATA.meetings.forEach(function (x, i) {
+    var st = mstat(x.dt);
+    h += '<div class="meeting"><div class="mrow"><div class="info"><div class="t">' + x.t + '</div>'
+      + '<div style="font-size:12px;color:#8fa3c8">' + x.m + '</div>'
+      + '<div class="mtime">🕒 ' + (x.dt ? fmtDT(x.dt) : 'Time TBA') + '</div>'
+      + '<div class="mcd cd-' + st.k + '">' + (x.dt ? countdown(x.dt) : '') + '</div></div>'
+      + '<span class="badge b-' + st.k + '">' + st.label + '</span>'
+      + (x.link ? '<a class="joinbtn" href="' + x.link + '" target="_blank">🔗 JOIN</a>' : '')
+      + '<button class="taskbtn" onclick="toTasks(DATA.meetings[' + i + '])">📋→Tasks</button>'
+      + '<button class="cbtn2" onclick="toggleCmt(' + i + ')">💬</button>'
+      + '</div><div class="cwrap"><div class="cinline" id="ci-' + i + '"><input id="cin-' + i + '" placeholder="Comment likho (sab yeh dekhenge)..."><button onclick="saveCmt(' + i + ')">✓</button></div>' + cmtHtml(x) + '</div></div>';
+  });
+  document.getElementById('meetings').innerHTML = h;
+}
+function render() {
+  renderMeetings();
+  var st = ''; DATA.stats.forEach(function (x) { st += '<div class="stat"><div class="n ' + x.c + '">' + x.n + '</div><div class="l">' + x.l + '</div></div>'; });
+  document.getElementById('stats').innerHTML = st;
+  var c = ''; DATA.cats.forEach(function (x) { var r = ''; x.rows.forEach(function (y) { r += '<div class="row"><span>' + y[0] + '</span><span style="color:#9fb2d6">' + y[1] + '</span></div>'; }); c += '<div class="cat"><h3>' + x.h + '</h3>' + r + '</div>'; });
+  document.getElementById('cats').innerHTML = c;
+  var p = ''; DATA.pipeline.forEach(function (x) { p += '<tr><td>' + x[0] + '</td><td>' + x[1] + '</td><td class="st st-' + x[3] + '">' + x[2] + '</td></tr>'; });
+  document.getElementById('pipe').innerHTML = p;
+}
+boot();
 </script>
 </body>
 </html>
