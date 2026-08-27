@@ -22,7 +22,8 @@
   .mrow { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
   .meeting .info { flex:1; min-width:200px; }
   .meeting .t { font-weight:700; font-size:16px; }
-  .mtime { font-size:15px; font-weight:700; margin-top:5px; }
+  .mtime { font-size:19px; font-weight:900; margin-top:6px; color:#fff; letter-spacing:.5px; }
+  .mcd { font-size:16px; font-weight:900; background:#0b1830; border:1px solid #1e3a5f; border-radius:8px; padding:4px 10px; display:inline-block; margin-top:6px; }
   .mcd { font-size:13px; font-weight:700; margin-top:3px; }
   .badge { padding:5px 12px; border-radius:20px; font-size:11px; font-weight:700; white-space:nowrap; }
   .b-far{background:#0c2a4d;color:#38bdf8;border:1px solid #0284c7;}
@@ -239,9 +240,9 @@ function renderMeetings() {
   DATA.meetings.forEach(function (x, i) {
     var st = mstat(x.dt);
     h += '<div class="meeting"><div class="mrow"><div class="info"><div class="t">' + x.t + '</div>'
-      + '<div style="font-size:12px;color:#8fa3c8">' + x.m + '</div>'
       + '<div class="mtime">🕒 ' + (x.dt ? fmtDT(x.dt) : 'Time TBA') + '</div>'
-      + '<div class="mcd cd-' + st.k + '">' + (x.dt ? countdown(x.dt) : '') + '</div></div>'
+      + '<div class="mcd cd-' + st.k + '">' + (x.dt ? countdown(x.dt) : '') + '</div>'
+      + '<div style="font-size:12px;color:#8fa3c8;margin-top:6px">' + x.m + '</div></div>'
       + '<span class="badge b-' + st.k + '">' + st.label + '</span>'
       + (x.link ? '<a class="joinbtn" href="' + x.link + '" target="_blank">🔗 JOIN</a>' : '')
       + '<button class="taskbtn" onclick="toTasks(DATA.meetings[' + i + '])">📋→Tasks</button>'
@@ -261,5 +262,5 @@ function render() {
 }
 boot();
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a31e43ff8a191e3f',t:'MTc4Nzg2NzE1MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
